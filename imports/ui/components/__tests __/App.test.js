@@ -16,7 +16,11 @@ describe('App component', () => {
 
     const wrapper = Enzyme.shallow(<App history={{}} />);
 
+    it('should render a BrowserRouter', () => {
+        assert.equal(wrapper.dive().find('BrowserRouter').length, 1);
+    });
+
     it('should render a MuiThemeProvider', () => {
-        assert(wrapper.find('MuiThemeProvider'));
+        assert.equal(wrapper.dive().find('MuiThemeProvider').length, 1);
     });
 });

@@ -7,34 +7,34 @@ import { withStyles } from 'material-ui/styles';
 
 // material-ui components
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
 
 // local files for theming & style
-import { gridStyle } from '../styles/layout';
+import { layoutStyle } from '../styles/layout';
 
 // local files other
+// import LeftPanel from '../components/LeftPanel.jsx';
+// import RightPanel from '../components/RightPanel.jsx';
 
 const Home = (props) => {
-    const { classes } = props;
     return (
-
-        <Grid container className={classes.root} spacing={16}>
-            <Grid item xs={6}>
-                <Paper>
-                    Some content on the left
-                </Paper>
-            </Grid>
-            <Grid item xs={6}>
-                <Paper>
-                    Some content on the right
-                </Paper>
-            </Grid>
-        </Grid>
+        <div>Just some content here please dear god</div>
+        // <Grid container className={classes.contentRoot}>
+        //     <Grid item xs={12}>
+        //         <Grid container alignItems="stretch">
+        //             <Grid item xs={6}>
+        //                 <LeftPanel />
+        //             </Grid>
+        //             <Grid item xs={6}>
+        //                 <RightPanel />
+        //             </Grid>
+        //         </Grid>
+        //     </Grid>
+        // </Grid>
     );
 };
 
-Home.propTypes = {
-    classes: PropTypes.shape().isRequired
-};
+// Home.propTypes = {
+//     classes: PropTypes.shape().isRequired
+// };
 
-export default withStyles(gridStyle)(Home);
+export default withStyles(layoutStyle)(Home);
