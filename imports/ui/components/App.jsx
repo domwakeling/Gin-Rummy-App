@@ -1,5 +1,7 @@
 // react & meteor imports
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // material-ui imports for theming & style
@@ -29,7 +31,7 @@ class App extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, user } = this.props;
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
@@ -38,6 +40,7 @@ class App extends React.Component {
                         <BrandAppBar
                             title="Gin Rummy"
                             toggleHandler={this.handleDrawerToggle}
+                            user={user}
                         />
                         <SideDrawer
                             open={this.state.drawerOpen}
@@ -59,7 +62,16 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    classes: PropTypes.shape().isRequired
+    classes: PropTypes.shape().isRequired,
+    user: PropTypes.shape()
 };
 
-export default withStyles(layoutStyle)(App);
+App.defaultProps = {
+    user: null
+};
+
+export default withStyles(layoutStyle)(withTracker(() => {
+    return {
+        user: Meteor.user()
+    };
+})(App));

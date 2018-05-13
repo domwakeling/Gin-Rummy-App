@@ -6,6 +6,7 @@ import { withStyles } from 'material-ui/styles';
 // material-ui components
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -14,7 +15,9 @@ import layoutStyle from '../styles/layout';
 // local files other
 
 const BrandAppBar = (props) => {
-    const { classes, title, toggleHandler } = props;
+    /* eslint-disable object-curly-newline */
+    const { classes, title, toggleHandler, user } = props;
+
     return (
         <AppBar position="absolute" color="primary" className={classes.appBar}>
             <Toolbar>
@@ -22,13 +25,20 @@ const BrandAppBar = (props) => {
                     color="inherit"
                     aria-label="open drawer"
                     onClick={toggleHandler}
-                    className={classes.navIconHide}
+                    className={classes.menuButton}
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="title" color="inherit">
+                <Typography
+                    variant="title"
+                    color="inherit"
+                    className={classes.appBarTitle}
+                >
                     {title}
                 </Typography>
+                <Button color="inherit">
+                    {user ? 'Logout' : 'Login' }
+                </Button>
             </Toolbar>
         </AppBar>
     );
@@ -37,7 +47,12 @@ const BrandAppBar = (props) => {
 BrandAppBar.propTypes = {
     title: PropTypes.string.isRequired,
     classes: PropTypes.shape().isRequired,
-    toggleHandler: PropTypes.func.isRequired
+    toggleHandler: PropTypes.func.isRequired,
+    user: PropTypes.shape()
+};
+
+BrandAppBar.defaultProps = {
+    user: null
 };
 
 export default withStyles(layoutStyle)(BrandAppBar);

@@ -12,6 +12,13 @@ const layoutStyle = theme => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1
     },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20
+    },
+    appBarTitle: {
+        flex: 1
+    },
     drawerPaper: {
         position: 'relative',
         whiteSpace: 'nowrap',
