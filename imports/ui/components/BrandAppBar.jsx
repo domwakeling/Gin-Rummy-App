@@ -21,14 +21,18 @@ const BrandAppBar = (props) => {
     return (
         <AppBar position="absolute" color="primary" className={classes.appBar}>
             <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleHandler}
-                    className={classes.menuButton}
-                >
-                    <MenuIcon />
-                </IconButton>
+                {window.innerWidth > 599 ? (
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={toggleHandler}
+                        className={classes.menuButton}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                ) : (
+                    <div style={{ width: '68px' }} />
+                )}
                 <Typography
                     variant="title"
                     color="inherit"

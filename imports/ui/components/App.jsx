@@ -22,7 +22,7 @@ import NoMatch from '../pages/NoMatch.jsx';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { drawerOpen: window.innerWidth > 600 };
+        this.state = { drawerOpen: window.innerWidth > 599 };
         this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     }
 

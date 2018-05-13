@@ -22,7 +22,12 @@ const layoutStyle = theme => ({
     drawerPaper: {
         position: 'relative',
         whiteSpace: 'nowrap',
-        width: drawerWidth,
+        [theme.breakpoints.only('xs')]: {
+            width: theme.spacing.unit * 7
+        },
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth
+        },
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
