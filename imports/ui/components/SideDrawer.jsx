@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 // material-ui imports for theming & style
 import { withStyles } from 'material-ui/styles';
 // material-ui components
@@ -18,7 +19,7 @@ const SideDrawer = (props) => {
         <div>
             <List>
                 {menuData.map(menuItem => (
-                    <ListItem button component="a" href={menuItem.link} key={menuItem.id}>
+                    <ListItem button component={Link} to={menuItem.link} key={menuItem.id}>
                         <ListItemIcon>
                             <menuItem.icon />
                         </ListItemIcon>

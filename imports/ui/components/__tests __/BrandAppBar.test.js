@@ -16,7 +16,13 @@ describe('BrandAppBar component', () => {
     if (Meteor.isServer) return;
 
     const toggleStub = sinon.spy();
-    const item = Enzyme.shallow(<BrandAppBar title="" toggleHandler={toggleStub} />);
+    const loginStub = sinon.spy();
+    const item = Enzyme
+        .shallow(<BrandAppBar
+            title=""
+            toggleHandler={toggleStub}
+            logInOutHandler={loginStub}
+        />);
 
     it('should render an AppBar component', () => {
         assert.equal(item.dive().find('WithStyles(AppBar)').length, 1);
@@ -36,7 +42,12 @@ describe('BrandAppBar component', () => {
     it('should NOT show \'login\' if there is a user', () => {
         const dummyUser = { id: '123', name: 'Dummy User' };
         const item2 = Enzyme
-            .shallow(<BrandAppBar title="" user={dummyUser} toggleHandler={toggleStub} />);
+            .shallow(<BrandAppBar
+                title=""
+                user={dummyUser}
+                toggleHandler={toggleStub}
+                logInOutHandler={loginStub}
+            />);
         const button = item2.dive().find('WithStyles(Button)');
         assert.notEqual(button.props().children, 'Login');
     });

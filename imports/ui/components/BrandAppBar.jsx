@@ -16,12 +16,12 @@ import layoutStyle from '../styles/layout';
 
 const BrandAppBar = (props) => {
     /* eslint-disable object-curly-newline */
-    const { classes, title, toggleHandler, user } = props;
+    const { classes, title, logInOutHandler, toggleHandler, user } = props;
 
     return (
         <AppBar position="absolute" color="primary" className={classes.appBar}>
             <Toolbar>
-                {window.innerWidth > 599 ? (
+                {window.innerWidth > 599 && (
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -30,8 +30,6 @@ const BrandAppBar = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                ) : (
-                    <div style={{ width: '68px' }} />
                 )}
                 <Typography
                     variant="title"
@@ -40,7 +38,7 @@ const BrandAppBar = (props) => {
                 >
                     {title}
                 </Typography>
-                <Button id="accountsButton" color="inherit">
+                <Button id="accountsButton" color="inherit" onClick={logInOutHandler}>
                     {user ? 'Logout' : 'Login' }
                 </Button>
             </Toolbar>
@@ -51,6 +49,7 @@ const BrandAppBar = (props) => {
 BrandAppBar.propTypes = {
     title: PropTypes.string.isRequired,
     classes: PropTypes.shape().isRequired,
+    logInOutHandler: PropTypes.func.isRequired,
     toggleHandler: PropTypes.func.isRequired,
     user: PropTypes.shape()
 };

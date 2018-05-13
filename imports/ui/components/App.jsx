@@ -14,7 +14,9 @@ import theme from '../styles/theme';
 import layoutStyle from '../styles/layout';
 // // local files other
 import BrandAppBar from './BrandAppBar.jsx';
+import BertSnackbar from './BertSnackbar.jsx';
 import SideDrawer from './SideDrawer.jsx';
+import PasswordDialog from './PasswordDialog.jsx';
 import Home from '../pages/Home.jsx';
 import About from '../pages/About.jsx';
 import NoMatch from '../pages/NoMatch.jsx';
@@ -22,13 +24,43 @@ import NoMatch from '../pages/NoMatch.jsx';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { drawerOpen: window.innerWidth > 599 };
+        this.state = {
+            drawerOpen: window.innerWidth > 599,
+            dialogOpen: false,
+            snackbarOpen: false,
+            snackbarMessage: ''
+        };
         this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+        this.handleLogInOutButton = this.handleLogInOutButton.bind(this);
+        this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
+        this.presentSnackbarMessage = this.presentSnackbarMessage.bind(this);
     }
 
-    handleDrawerToggle = () => {
+    handleDrawerToggle = (e) => {
+        e.preventDefault();
         this.setState({ drawerOpen: !this.state.drawerOpen });
     };
+
+    handleLogInOutButton = (e) => {
+        e.preventDefault();
+        if (this.props.user) {
+            Meteor.logout();
+        } else {
+            this.setState({ dialogOpen: true });
+        }
+    }
+
+    handleDialogClose = () => {
+        this.setState({ dialogOpen: false });
+    };
+
+    presentSnackbarMessage = (message) => {
+        this.setState({ snackbarOpen: true, snackbarMessage: message });
+    }
+
+    handleSnackbarClose = () => {
+        this.setState({ snackbarOpen: false });
+    }
 
     render() {
         const { classes, user } = this.props;
@@ -40,11 +72,22 @@ class App extends React.Component {
                         <BrandAppBar
                             title="Gin Rummy"
                             toggleHandler={this.handleDrawerToggle}
+                            logInOutHandler={this.handleLogInOutButton}
                             user={user}
+                        />
+                        <PasswordDialog
+                            bert={this.presentSnackbarMessage}
+                            open={this.state.dialogOpen}
+                            closeDialog={this.handleDialogClose}
                         />
                         <SideDrawer
                             open={this.state.drawerOpen}
                             toggleHandler={this.handleDrawerToggle}
+                        />
+                        <BertSnackbar
+                            open={this.state.snackbarOpen}
+                            closeSnackbar={this.handleSnackbarClose}
+                            message={this.state.snackbarMessage}
                         />
                         <div className={classes.content}>
                             <div className={classes.toolbar} />
