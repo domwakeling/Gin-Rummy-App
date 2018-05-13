@@ -36,7 +36,7 @@ class PasswordDialog extends React.Component {
         this.toggleState = this.toggleState.bind(this);
         this.emailChangeHandler = this.emailChangeHandler.bind(this);
         this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
-        this.dialogueSubmitHandler = this.dialogueSubmitHandler.bind(this);
+        this.dialogSubmitHandler = this.dialogSubmitHandler.bind(this);
     }
 
     toggleState = (e) => {
@@ -62,7 +62,7 @@ class PasswordDialog extends React.Component {
         }
     }
 
-    dialogueSubmitHandler = (e) => {
+    dialogSubmitHandler = (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password1').value;
@@ -94,7 +94,6 @@ class PasswordDialog extends React.Component {
                 }
             });
         }
-        // this.props.closeDialog();
     }
 
     render() {
@@ -107,14 +106,24 @@ class PasswordDialog extends React.Component {
             >
                 <DialogTitle id="form-dialog-title">
                     {modeTitle[this.state.mode]}
-                    <Button color="primary" style={changeButton} onClick={this.toggleState}>
+                    <Button
+                        id="modeToggleButton"
+                        color="primary"
+                        style={changeButton}
+                        onClick={this.toggleState}
+                    >
                         {modeTitle[Math.max(0, 1 - this.state.mode)]}
                     </Button>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter your email address and password to sign in, or click
-                        on &apos;Create Account&apos; if you do not have an account yet.
+                        {this.state.mode === modeEnum.SIGNIN ? (
+                            `Please enter your email address and password to sign in, or select
+                            'Create Account' if you do not have an account yet.`
+                        ) : (
+                            `Please enter your email address and password to create an account,
+                            or select 'Sign In' if you already have one.`
+                        )}
                     </DialogContentText>
                     <TextField
                         onChange={this.emailChangeHandler}
@@ -155,8 +164,9 @@ class PasswordDialog extends React.Component {
                         Cancel
                     </Button>
                     <Button
+                        id="signInButton"
                         color="primary"
-                        onClick={this.dialogueSubmitHandler}
+                        onClick={this.dialogSubmitHandler}
                         disabled={!(this.state.emailValid && this.state.password1Valid &&
                             (this.state.mode === modeEnum.SIGNUP ? this.state.password2Valid : true)
                         )}
