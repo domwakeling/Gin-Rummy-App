@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { check, Match } from 'meteor/check';
+import { check } from 'meteor/check';
 
 if (Meteor.isServer) {
     Meteor.methods({
@@ -22,19 +22,6 @@ if (Meteor.isServer) {
                 // Handle error when email already verified
                 throw new Meteor.Error(403, 'Already verified');
             }
-        },
-
-        'accounts.setProfile': function setProfile(userId, name, city, state, country) {
-            check([userId, name, city, state, country], [Match.Maybe(String)]);
-            const updateSet = {
-                profile: {
-                    userName: name,
-                    userCity: city,
-                    userState: state,
-                    userCountry: country
-                }
-            };
-            Meteor.users.update({ _id: userId }, { $set: updateSet });
         },
 
         'accounts.delete': function deleteAccount(userId) {

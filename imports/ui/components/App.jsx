@@ -70,8 +70,7 @@ App.defaultProps = {
     user: null
 };
 
-export default withStyles(layoutStyle)(withTracker(() => {
-    return {
+export default withStyles(layoutStyle)(withTracker(() => (
+    {
         user: Meteor.user()
-    };
-})(App));
+    }))(App));

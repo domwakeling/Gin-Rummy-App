@@ -16,11 +16,14 @@ describe('App component', () => {
 
     const wrapper = Enzyme.shallow(<App history={{}} />);
 
+    // dive() twice - once for the withStyles wrapper in material-ui, and again for
+    // the withTracker wrapper from meteor/react-meteor-data
+
     it('should render a BrowserRouter', () => {
-        assert.equal(wrapper.dive().find('BrowserRouter').length, 1);
+        assert.equal(wrapper.dive().dive().find('BrowserRouter').length, 1);
     });
 
     it('should render a MuiThemeProvider', () => {
-        assert.equal(wrapper.dive().find('MuiThemeProvider').length, 1);
+        assert.equal(wrapper.dive().dive().find('MuiThemeProvider').length, 1);
     });
 });

@@ -36,7 +36,7 @@ const BrandAppBar = (props) => {
                 >
                     {title}
                 </Typography>
-                <Button color="inherit">
+                <Button id="accountsButton" color="inherit">
                     {user ? 'Logout' : 'Login' }
                 </Button>
             </Toolbar>
