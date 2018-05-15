@@ -7,24 +7,23 @@ import { withStyles } from 'material-ui/styles';
 
 // material-ui components
 import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
+// import Typography from 'material-ui/Typography';
 
 // local files for theming & style
 import { panelStyle } from '../styles/panel';
 
-const RightPanel = (props) => {
-    const { classes } = props;
+const ContentPanel = (props) => {
+    const { classes, children } = props;
     return (
-        <Paper className={classes.paper}>
-            <Typography variant="title">
-                Right header
-            </Typography>
+        <Paper className={classes.panel}>
+            {children}
         </Paper>
     );
 };
 
-RightPanel.propTypes = {
+ContentPanel.propTypes = {
+    children: PropTypes.shape().isRequired,
     classes: PropTypes.shape().isRequired
 };
 
-export default withStyles(panelStyle)(RightPanel);
+export default withStyles(panelStyle)(ContentPanel);

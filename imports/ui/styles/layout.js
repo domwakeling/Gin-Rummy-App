@@ -21,6 +21,7 @@ const layoutStyle = theme => ({
     },
     drawerPaper: {
         position: 'relative',
+        backgroundColor: theme.palette.primary.light,
         whiteSpace: 'nowrap',
         [theme.breakpoints.only('xs')]: {
             width: theme.spacing.unit * 7
@@ -47,7 +48,10 @@ const layoutStyle = theme => ({
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
+        paddingTop: theme.spacing.unit * 2,
+        paddingLeft: theme.spacing.unit * 3,
+        paddingRight: theme.spacing.unit * 3,
+        paddingBottom: theme.spacing.unit * 3,
         minWidth: 0 // So the Typography noWrap works
     },
     toolbar: theme.mixins.toolbar

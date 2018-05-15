@@ -4,7 +4,7 @@ import blue from 'material-ui/colors/blue';
 
 const theme = createMuiTheme({
     palette: {
-        primary: { main: orange[500] },
+        primary: { main: orange[500], light: orange[100] },
         secondary: { main: blue[500] }
     }
 });

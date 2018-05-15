@@ -45,6 +45,7 @@ class App extends React.Component {
         e.preventDefault();
         if (this.props.user) {
             Meteor.logout();
+            this.presentSnackbarMessage('Logged out');
         } else {
             this.setState({ dialogOpen: true });
         }
